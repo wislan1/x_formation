@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <stdio.h>
+#include <cstdlib>
+
 
 using namespace std;
 
@@ -20,18 +22,20 @@ public:
   //To test it we can allocate huge amount of memory more then
   //that available on the heap, program then crashes.
   //when we have to use legacy code we may update it like this.
-  /*
+  //*
     if(m_nSize > 0)
     {//in following code we call default constructor of class T
       m_pData = new (nothrow) T[m_nSize];
       if(m_pData==NULL)
       {
-        cout<<"allocation failure!"
+        cout<<"allocation failure!";
         exit(1);
       }
     }
   //*/
-  //or better we use following code
+
+/*
+  //we may as well use following code but throwing exception from constructor is not advisable
     try
     {//in following code we call default constructor of class T
       m_pData = new T[m_nSize];
@@ -43,7 +47,9 @@ public:
        // we may rethrow the exception up
        throw;
     }
+	//*/
   }
+
 //copy constructor
   Array(const Array& c)
   {
